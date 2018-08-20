@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     android:gravity="center"
 
+
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:textColor="#ffffff"
+    android:background="@drawable/line_right"
     android:textSize="16sp">
 
 </TextView>

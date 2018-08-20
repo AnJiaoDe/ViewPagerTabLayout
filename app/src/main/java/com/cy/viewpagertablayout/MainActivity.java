@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
     private float positionOffset_last = 0;
 
+    private int postion_current_last = 0;
+    private int x_last_position_left = 0;
+    private int offset_last = 0;
+    private int position_last = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         list_title = new ArrayList<>();
-        list_title.add("title0");
-        list_title.add("title1");
-        list_title.add("title2");
-        list_title.add("title3");
-        list_title.add("title4");
-        list_title.add("title5");
-        list_title.add("title6");
-        list_title.add("title7");
+        list_title.add("胡歌0");
+        list_title.add("霍建华1");
+        list_title.add("屌丝胡2");
+        list_title.add("美女3");
+        list_title.add("彩笔4");
+        list_title.add("坑逼5");
+        list_title.add("撕逼6");
+        list_title.add("傻逼7");
 
 
         viewPager = (TabViewPager) findViewById(R.id.vp);
@@ -126,77 +131,44 @@ public class MainActivity extends AppCompatActivity {
 //                Log.e("position", "+++++++++++++++++++++++++++" + position);
                 LinearLayoutManager layoutManager = (LinearLayoutManager) cyTabLayout.getRecyclerView().getLayoutManager();
 //
-                int position_firstVisible = layoutManager.findFirstVisibleItemPosition();
 //
-                Log.e("width","+++++++++++++++++++"+layoutManager.getChildAt(position).getWidth());
+//                Log.e("width", "+++++++++++++++++++" + layoutManager.getChildAt(position).getWidth());
 
 
                 int offset = (int) ((positionOffset) * layoutManager.getChildAt(position).getWidth());
-                int offset_last = (int) ((positionOffset_last) * layoutManager.getChildAt(position).getWidth());
+                offset_last = (int) ((positionOffset_last) * layoutManager.getChildAt(position).getWidth());
                 Log.e("offset", "__________________________" + offset);
-                Log.e("offset_last","__________________________"+offset_last);
-//                /**当前Tab的left+当前Tab的Width乘以positionOffset*/
-//                int newScrollX = layoutManager.getChildAt(position).getLeft() + offset;
-//                int newScrollX_last = layoutManager.getChildAt(position).getLeft() + offset_last;
+                Log.e("offset_last", "__________________________" + offset_last);
 
-//                newScrollX=Math.abs(newScrollX-newScrollX_last);
+                offset = offset - offset_last;
 
-                offset=offset-offset_last;
-//                if (position > 0 || offset > 0) {
-//                    //HorizontalScrollView移动到当前tab,并居中
-//                    newScrollX -= cyTabLayout.getRecyclerView().getWidth() / 2 - cyTabLayout.getRecyclerView().getPaddingLeft();
-////                    calcIndicatorRect();
-////                    newScrollX += (( mTabRect.right - mTabRect.left) / 2);
-//
-//                }
+                if (offset<0){
+                    cyTabLayout.getRecyclerView().scrollBy(0, 0);
 
+                }else {
 
-//                Log.e("widht","__________________________"+layoutManager .getChildAt(position).getWidth());
-
-//                cyTabLayout.getRecyclerView().smoothScrollToPosition(position);
-
-                cyTabLayout.getRecyclerView().scrollBy(offset, 0);
-//                cyTabLayout.invalidate();
+                    cyTabLayout.getRecyclerView().scrollBy(offset, 0);
+                }
                 positionOffset_last = positionOffset;
 
-
-//                int startX = cyTabLayout.getRecyclerView().getScrollX();// 起始的坐标X
-//                int startY = cyTabLayout.getRecyclerView().getScrollY();// 起始的坐标Y
-////
-////                Log.e("startX","__________________________"+startX);
-////                Log.e("startY","__________________________"+startY);
-//                int endX =newScrollX;
-//                int endY = 0;
-////
-//                int dx = endX - startX;// 增量X
-//                int dy = endY - startY;// 增量Y
-//////
-//////
-//                Log.e("dx", "__________________________" + dx);
-
-//                cyTabLayout.getRecyclerView().getScroller().startScroll(startX,startY,dx,dy);
-//
-//                cyTabLayout.getRecyclerView().invalidate();
             }
 
             @Override
             public void onPageSelected(int position) {
-//                cyTabLayout.getRecyclerView().smoothScrollToPosition(position);
 
-//                cyTabLayout.getRecyclerView().scrollTo(
-//                        cyTabLayout.getRecyclerView().getWidth()*position/rvAdapter.getItemCount(),0);
-//                rvAdapter.setSelectedPosition(position);
-//
-//                cyTabLayout.setPostion_current(position);
+//                cyTabLayout.getRecyclerView().scrollTo(100,0);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) cyTabLayout.getRecyclerView().getLayoutManager();
 
-
-//                cyTabLayout.getRecyclerView().scrollToPosition((position<rvAdapter.getItemCount()-1)?(position+1):position);
 
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
 
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    Log.e("停止","++++++++++++++++++++++++");
+
+                }
 
             }
         });
